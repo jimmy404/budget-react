@@ -33,7 +33,11 @@ const initialEntries = [
 
 const App = () => {
   const [entries, setEntries] = useState(initialEntries);
-  console.log(entries);
+
+  const deleteEntry = (id) => {
+    const result = entries.filter((entry) => entry.id !== id);
+    setEntries(result);
+  };
 
   return (
     <Container>
@@ -45,7 +49,7 @@ const App = () => {
 
       <MainHeader title="History" type="h3" />
 
-      <EntryLines entries={entries} />
+      <EntryLines entries={entries} deleteEntry={deleteEntry} />
 
       <MainHeader title="Add new transaction" type="h3" />
 
