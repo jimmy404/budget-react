@@ -1,11 +1,17 @@
 import React from "react";
 import EntryLine from "./EntryLine";
 
-const EntryLines = ({ entries, deleteEntry }) => {
+const EntryLines = ({ entries, deleteEntry, setIsOpen, editEntry }) => {
   return (
     <>
       {entries.map((entry) => (
-        <EntryLine key={entry.id} {...entry} deleteEntry={deleteEntry} />
+        <EntryLine
+          key={entry.id}
+          {...entry}
+          deleteEntry={deleteEntry}
+          setIsOpen={setIsOpen}
+          editEntry={editEntry}
+        />
       ))}
     </>
   );
