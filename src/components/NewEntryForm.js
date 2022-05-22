@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form } from "semantic-ui-react";
 import ButtonSaveOrCancel from "./ButtonSaveOrCancel";
 
-const NewEntryForm = () => {
+const NewEntryForm = ({ addEntry }) => {
+  const [description, setDescription] = useState("");
+  const [value, setValue] = useState("");
+
   return (
     <Form unstackable>
       <Form.Group>
@@ -11,6 +14,8 @@ const NewEntryForm = () => {
           width={12}
           label="Description"
           placeholder="New Shinny thing"
+          value={description}
+          onChange={(event) => setDescription(event.target.value)}
         />
         <Form.Input
           icon="dollar"
@@ -18,9 +23,15 @@ const NewEntryForm = () => {
           label="Value"
           placeholder="0.00"
           iconPosition="left"
+          value={value}
+          onChange={(event) => setValue(event.target.value)}
         />
       </Form.Group>
-      <ButtonSaveOrCancel />
+      <ButtonSaveOrCancel
+        addEntry={addEntry}
+        description={description}
+        value={value}
+      />
     </Form>
   );
 };

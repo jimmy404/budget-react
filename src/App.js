@@ -29,6 +29,12 @@ const initialEntries = [
     value: "$1000",
     isExpense: false,
   },
+  {
+    id: 4,
+    description: "Programing 2",
+    value: "$100",
+    isExpense: true,
+  },
 ];
 
 const App = () => {
@@ -36,6 +42,16 @@ const App = () => {
 
   const deleteEntry = (id) => {
     const result = entries.filter((entry) => entry.id !== id);
+    setEntries(result);
+  };
+
+  const addEntry = (description, value) => {
+    const result = entries.concat({
+      id: entries.length + 1,
+      description,
+      value,
+    });
+    console.log(result);
     setEntries(result);
   };
 
@@ -53,7 +69,7 @@ const App = () => {
 
       <MainHeader title="Add new transaction" type="h3" />
 
-      <NewEntryForm />
+      <NewEntryForm addEntry={addEntry} />
     </Container>
   );
 };
