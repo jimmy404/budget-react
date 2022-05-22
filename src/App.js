@@ -9,11 +9,12 @@ import {
   Statistic,
 } from "semantic-ui-react";
 import "./App.css";
+import MainHeader from "./components/MainHeader";
 
 function App() {
   return (
     <Container>
-      <Header as="h1">Budget</Header>
+      <MainHeader title="Budget" />
 
       <Statistic size="small">
         <Statistic.Label>Your Balance:</Statistic.Label>
@@ -43,7 +44,8 @@ function App() {
         </Grid>
       </Segment>
 
-      <Header as="h3">History</Header>
+      <MainHeader title="History" type="h3" />
+
       <Segment color="red">
         <Grid columns={3} textAlign="right">
           <Grid.Row>
@@ -78,7 +80,7 @@ function App() {
         </Grid>
       </Segment>
 
-      <Header as="h3">Add new transaction</Header>
+      <MainHeader title="Add new transaction" type="h3" />
 
       <Form unstackable>
         <Form.Group>
