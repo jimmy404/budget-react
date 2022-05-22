@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Container } from "semantic-ui-react";
 
@@ -10,7 +10,10 @@ import EntryLine from "./components/EntryLine";
 
 import "./App.css";
 
-function App() {
+const initialEntries = [{}];
+
+const App = () => {
+  const [entries, setEntries] = useState(initialEntries);
   return (
     <Container>
       <MainHeader title="Budget" />
@@ -29,6 +32,6 @@ function App() {
       <NewEntryForm />
     </Container>
   );
-}
+};
 
 export default App;
