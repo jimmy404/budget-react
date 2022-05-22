@@ -6,14 +6,35 @@ import MainHeader from "./components/MainHeader";
 import NewEntryForm from "./components/NewEntryForm";
 import DisplayBalance from "./components/DisplayBalance";
 import DisplayBalances from "./components/DisplayBalances";
-import EntryLine from "./components/EntryLine";
+import EntryLines from "./components/EntryLines";
 
 import "./App.css";
 
-const initialEntries = [{}];
+const initialEntries = [
+  {
+    id: 1,
+    description: "Work income",
+    value: "$100",
+    isExpense: false,
+  },
+  {
+    id: 2,
+    description: "Water bill",
+    value: "$10",
+    isExpense: true,
+  },
+  {
+    id: 3,
+    description: "Programing",
+    value: "$1000",
+    isExpense: false,
+  },
+];
 
 const App = () => {
   const [entries, setEntries] = useState(initialEntries);
+  console.log(entries);
+
   return (
     <Container>
       <MainHeader title="Budget" />
@@ -24,8 +45,7 @@ const App = () => {
 
       <MainHeader title="History" type="h3" />
 
-      <EntryLine description="Income" value="123,05" />
-      <EntryLine description="Expense" value="10,05" isExpense />
+      <EntryLines entries={entries} />
 
       <MainHeader title="Add new transaction" type="h3" />
 
