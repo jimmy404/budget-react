@@ -45,11 +45,12 @@ const App = () => {
     setEntries(result);
   };
 
-  const addEntry = (description, value) => {
+  const addEntry = (description, value, isExpense) => {
     const result = entries.concat({
       id: entries.length + 1,
       description,
       value,
+      isExpense,
     });
     console.log(result);
     setEntries(result);
