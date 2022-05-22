@@ -1,10 +1,14 @@
-import { Container, Grid, Icon, Segment } from "semantic-ui-react";
+import React from "react";
+
+import { Container } from "semantic-ui-react";
+
 import MainHeader from "./components/MainHeader";
 import NewEntryForm from "./components/NewEntryForm";
 import DisplayBalance from "./components/DisplayBalance";
-import "./App.css";
 import DisplayBalances from "./components/DisplayBalances";
 import EntryLine from "./components/EntryLine";
+
+import "./App.css";
 
 function App() {
   return (
