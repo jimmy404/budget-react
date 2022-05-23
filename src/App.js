@@ -46,6 +46,12 @@ const App = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [entryId, setEntryId] = useState();
 
+  const resetEntry = () => {
+    setDescription("");
+    setValue("");
+    setIsExpense(true);
+  };
+
   useEffect(() => {
     if (!isOpen && entryId) {
       const index = entries.findIndex((entry) => entry.id === entryId);
@@ -54,6 +60,7 @@ const App = () => {
       newEntries[index].value = value;
       newEntries[index].isExpense = isExpense;
       setEntries(newEntries);
+      resetEntry();
     }
   }, [isOpen]);
 
@@ -74,15 +81,16 @@ const App = () => {
     }
   };
 
-  const addEntry = (description, value, isExpense) => {
+  const addEntry = () => {
     const result = entries.concat({
       id: entries.length + 1,
       description,
       value,
       isExpense,
     });
-    console.log(result);
+
     setEntries(result);
+    resetEntry();
   };
 
   return (
