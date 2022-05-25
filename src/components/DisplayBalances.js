@@ -1,5 +1,6 @@
 import React from "react";
 import { Grid, Segment } from "semantic-ui-react";
+
 import DisplayBalance from "./DisplayBalance";
 
 const DisplayBalances = ({ totalIncome, totalExpenses }) => {
