@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import { useSelector } from "react-redux";
 import { Container } from "semantic-ui-react";
 
 import MainHeader from "./components/MainHeader";
@@ -7,39 +7,12 @@ import NewEntryForm from "./components/NewEntryForm";
 import DisplayBalance from "./components/DisplayBalance";
 import DisplayBalances from "./components/DisplayBalances";
 import EntryLines from "./components/EntryLines";
-
-import "./App.css";
 import ModalEdit from "./components/ModalEdit";
 
-const initialEntries = [
-  {
-    id: 1,
-    description: "Work income",
-    value: 100,
-    isExpense: false,
-  },
-  {
-    id: 2,
-    description: "Water bill",
-    value: 10,
-    isExpense: true,
-  },
-  {
-    id: 3,
-    description: "Programing",
-    value: 1000,
-    isExpense: false,
-  },
-  {
-    id: 4,
-    description: "Programing 2",
-    value: 100,
-    isExpense: true,
-  },
-];
+import "./App.css";
 
 const App = () => {
-  const [entries, setEntries] = useState(initialEntries);
+  const entries = useSelector((state) => state.entries);
   const [description, setDescription] = useState("");
   const [value, setValue] = useState("");
   const [isExpense, setIsExpense] = useState(true);
@@ -62,7 +35,7 @@ const App = () => {
       newEntries[index].description = description;
       newEntries[index].value = value;
       newEntries[index].isExpense = isExpense;
-      setEntries(newEntries);
+      //setEntries(newEntries);
       resetEntry();
     }
 
@@ -86,7 +59,7 @@ const App = () => {
 
   const deleteEntry = (id) => {
     const result = entries.filter((entry) => entry.id !== id);
-    setEntries(result);
+    //setEntries(result);
   };
 
   const editEntry = (id) => {
@@ -109,7 +82,7 @@ const App = () => {
       isExpense,
     });
 
-    setEntries(result);
+    //setEntries(result);
     resetEntry();
   };
 
@@ -123,12 +96,7 @@ const App = () => {
 
       <MainHeader title="History" type="h3" />
 
-      <EntryLines
-        entries={entries}
-        deleteEntry={deleteEntry}
-        setIsOpen={setIsOpen}
-        editEntry={editEntry}
-      />
+      <EntryLines entries={entries} editEntry={editEntry} />
 
       <MainHeader title="Add new transaction" type="h3" />
 
