@@ -13,34 +13,17 @@ import "./App.css";
 
 const App = () => {
   const entries = useSelector((state) => state.entries);
-  const [description, setDescription] = useState("");
-  const [value, setValue] = useState("");
-  const [isExpense, setIsExpense] = useState(true);
-  const [isOpen, setIsOpen] = useState(false);
-  const [entryId, setEntryId] = useState();
+  const { isOpen, id } = useSelector((state) => state.modals);
+
   const [incomeTotal, setIncomeTotal] = useState(0);
   const [expenseTotal, setExpenseTotal] = useState(0);
   const [total, setTotal] = useState(0);
-
-  const resetEntry = () => {
-    setDescription("");
-    setValue("");
-    setIsExpense(true);
-  };
+  const [entry, setEntry] = useState();
 
   useEffect(() => {
-    if (!isOpen && entryId) {
-      const index = entries.findIndex((entry) => entry.id === entryId);
-      const newEntries = [...entries];
-      newEntries[index].description = description;
-      newEntries[index].value = value;
-      newEntries[index].isExpense = isExpense;
-      //setEntries(newEntries);
-      resetEntry();
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen]);
+    const index = entries.findIndex((entry) => entry.id === id);
+    setEntry(entries[index]);
+  }, [isOpen, id]);
 
   useEffect(() => {
     let totalIncomes = 0;
@@ -62,30 +45,6 @@ const App = () => {
     //setEntries(result);
   };
 
-  const editEntry = (id) => {
-    if (id) {
-      const index = entries.findIndex((entry) => entry.id === id);
-      const entry = entries[index];
-      setEntryId(id);
-      setDescription(entry.description);
-      setValue(entry.value);
-      setIsExpense(entry.isExpense);
-      setIsOpen(true);
-    }
-  };
-
-  const addEntry = () => {
-    const result = entries.concat({
-      id: entries.length + 1,
-      description,
-      value,
-      isExpense,
-    });
-
-    //setEntries(result);
-    resetEntry();
-  };
-
   return (
     <Container>
       <MainHeader title="Budget" />
@@ -96,30 +55,12 @@ const App = () => {
 
       <MainHeader title="History" type="h3" />
 
-      <EntryLines entries={entries} editEntry={editEntry} />
+      <EntryLines entries={entries} />
 
       <MainHeader title="Add new transaction" type="h3" />
 
-      <NewEntryForm
-        addEntry={addEntry}
-        description={description}
-        value={value}
-        isExpense={isExpense}
-        setDescription={setDescription}
-        setValue={setValue}
-        setIsExpense={setIsExpense}
-      />
-      <ModalEdit
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        addEntry={addEntry}
-        description={description}
-        value={value}
-        isExpense={isExpense}
-        setDescription={setDescription}
-        setValue={setValue}
-        setIsExpense={setIsExpense}
-      />
+      <NewEntryForm />
+      <ModalEdit isOpen={isOpen} {...entry} />
     </Container>
   );
 };

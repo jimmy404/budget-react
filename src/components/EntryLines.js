@@ -1,11 +1,12 @@
 import React from "react";
+
 import EntryLine from "./EntryLine";
 
-const EntryLines = ({ entries, editEntry }) => {
+const EntryLines = ({ entries }) => {
   return (
     <>
       {entries.map((entry) => (
-        <EntryLine key={entry.id} {...entry} editEntry={editEntry} />
+        <EntryLine key={entry.id} {...entry} />
       ))}
     </>
   );
